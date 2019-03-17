@@ -1,0 +1,225 @@
+﻿@section head{
+    <style>
+        .layui-body {
+            position: fixed;
+            top: 90px;
+            bottom: 0;
+        }
+
+        .dcf-iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /*padding: 30px 20px;*/
+        }
+    </style>
+}
+<body class="layui-layout-body">
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">智能监测网关</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            @*<ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item">
+                        <a href="">监测网关网络状态</a>
+                    </li>
+
+                </ul>*@
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> Admin
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">基本资料</a>
+                        </dd>
+                        <dd>
+                            <a href="">安全设置</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">[注销]</a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">网关状态</a>
+                        <dl class="layui-nav-child" id="TagPage1">
+                            <dd v-for="page in pages">
+                                <a :href="page.func">{{page.name}}</a>
+                            </dd>
+
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">网关服务</a>
+                        <dl class="layui-nav-child" id="TagPage2">
+                            <dd v-for="page in pages">
+                                <a :href="page.func">{{page.name}}</a>
+                            </dd>
+
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">网关系统</a>
+                        <dl class="layui-nav-child" id="TagPage3">
+                            <dd v-for="page in pages">
+                                <a :href="page.func">{{page.name}}</a>
+                            </dd>
+
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div id="" style="padding: 15px;">
+                <iframe id="dcf_iframe"  frameborder="0" class="dcf-iframe"></iframe>
+                <!--<div id="func1"></div>-->
+            </div>
+            <div class="layui-footer">
+                <!-- 底部固定区域 -->
+                © 广州大盛公数码信息有限公司
+            </div>
+        </div>
+
+
+        <script>
+            $(window).ready(function () {
+                init();
+            });
+            function init() {
+                layui.use('element', function () {
+                    var element = layui.element;
+                    element.init();
+                });
+
+                var app = new Vue({
+                    el: "#TagPage1",
+                    data: {
+                        pages: [{
+                            name: '网络状态',
+                            func: "javascript:ShowHTML('../Pages/NetworkStatus')",
+                            isActive: true
+                        },
+                        {
+                            name: '挂载设备',
+                            func: "javascript:ShowHTML('../Pages/MountedDevice')"
+                        },
+                        {
+                            name: 'WiFi状态',
+                            func: "javascript:ShowHTML('../Pages/WiFiStatus')"
+                        },
+                        {
+                            name: '板载4G模块',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '内置4G路由器',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GRouter')"
+                        },
+                        {
+                            name: '参数设置',
+                            func: "javascript:ShowHTML('../Pages/ProgramConfig')",
+                            isActive: true
+                        },
+                        {
+                            name: '1GHz传感器',
+                            func: "javascript:ShowHTML('../Pages/A_1GHzSensor')"
+                        },
+                        {
+                            name: '1.7GHz传感器',
+                            func: "javascript:ShowHTML('../Pages/A_1_7GHzSensor')"
+                        },
+                        {
+                            name: '设备硬件状态',
+                            func: "javascript:ShowHTML('../Pages/DevHandwareStatus')",
+                            isActive: true
+                        }
+                        ]
+                    }
+                });
+                var app2 = new Vue({
+                    el: "#TagPage2",
+                    data: {
+                        pages: [{
+                            name: '频谱取样',
+                            func: "javascript:ShowHTML('../Pages/PinPuQuYang')"
+                        },
+                        {
+                            name: '音频取样',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '信号取样',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '台站信息',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '预警信息',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '报告文档',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '信息报表',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '通知通报',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        },
+                        {
+                            name: '设备日志',
+                            func: "javascript:ShowHTML('../Pages/Onboard4GModel')"
+                        }
+                        ]
+                    }
+                });
+                var app3 = new Vue({
+                    el: "#TagPage3",
+                    data: {
+                        pages: [{
+                            name: '账号设置',
+                            func: "javascript:ShowHTML('../Pages/AccountSet')"
+                        },
+                        {
+                            name: '系统工具',
+                            func: "javascript:ShowHTML('../Pages/SysTools')",
+                            isActive: true
+                        },
+                        {
+                            name: '系统日志',
+                            func: "javascript:ShowHTML('../Pages/SysLogs')"
+                        }
+                        ]
+                    }
+                });
+                ShowHTML("../Pages/NetworkStatus");
+            }
+
+            function ShowHTML(html) {
+                var timeTemp = new Date().getTime();
+                html = html + "?time=" + timeTemp;
+                document.getElementById('dcf_iframe').src = html
+            }
+                                                                //JavaScript代码区域
+        </script>
+</body>

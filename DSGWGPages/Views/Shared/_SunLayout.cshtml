@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <style>
+        .attentionSpan {
+            color: red
+        }
+    </style>
+    @RenderSection("head", false)
+}
+<body class="layui-layout-body grayBg" style="overflow: auto;">
+
+    <div class="layui-card layui-card-header">
+        @ViewBag.smallTitle
+        @if (ViewBag.haveAttentionSpan)
+        {
+            <span class="attentionSpan">*@ViewBag.attentionContent*</span>
+        }
+    </div>
+    @RenderBody()
+</body>

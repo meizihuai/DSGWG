@@ -1,0 +1,38 @@
+.dcf-title {
+    font-size: 17px;
+}
+
+.dcf-body {
+    min-width: 900px;
+}
+
+.layadmin-header {
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.layuiadmin-card-list {
+    padding: 15px;
+}
+
+.grayBg {
+    background-color: #F2F2F2
+}
+
+
+.layuiadmin-card-list {
+    font-size: 36px;
+    color: #666;
+    line-height: 36px;
+    padding: 5px 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+}
+
+.laycardAdmin {
+    width: 150px;
+}

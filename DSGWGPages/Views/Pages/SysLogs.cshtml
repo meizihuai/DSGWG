@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayoutWithDiv.cshtml";
+    ViewBag.smallTitle = "系统日志";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+    <style>
+        .dcf-div {
+            padding: 10px 15px;
+            width: 900px;
+            height: 80px;
+        }
+    </style>
+}
+<div class="dcf-div">
+    <div class="layui-inline">
+        <label class="layui-form-label">起始日期</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="startTime" placeholder=" - ">
+        </div>
+
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">结束日期</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="endTime" placeholder=" - ">
+        </div>
+
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">日志类型</label>
+        <div class="layui-input-inline">
+            <select name="" class="input_type select_type" style="height: 35px;width:100px;margin-top: 2px;border-radius: 5px;">
+                <option value="0">类型1</option>
+                <option value="1">类型2</option>
+                <option value="2">类型3</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline" style="margin-left: 20px;">
+        <button class="layui-btn">查询</button>
+    </div>
+</div>
+<div class="layui-form-item" style="padding: 5px 5px;">
+    <table lay-filter="logTable">
+        <thead>
+            <tr>
+                <th lay-data="{field:'id', width:100,type:'numbers'}">序号</th>
+                <th lay-data="{field:'TaskName', width:120}">日志时间</th>
+                <th lay-data="{field:'TaskNickName',width:150}">日志类型</th>
+                <th lay-data="{field:'DeviceID',width:150}">备注</th>
+                <th lay-data="{field:'DeviceName',width:150}">日志内容</th>
+                <th lay-data="{field:'StartTime',width:150}">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+@section script{
+    <script>
+        layui.use(['laydate', 'table'], function () {
+            var laydate = layui.laydate;
+            var table = layui.table;
+            laydate.render({
+                elem: '#startTime'
+            });
+            laydate.render({
+                elem: '#endTime'
+            });
+
+            table.init('logTable', {
+                //		    		url:'http://123.207.31.37:8080/?func=GetMyTask&token='+token,
+                async: true,
+                dataType: 'json',
+                limit: 1000,
+                data: {}
+            });
+        })
+    </script>
+
+}

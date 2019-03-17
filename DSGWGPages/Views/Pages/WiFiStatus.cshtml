@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayoutWithDiv.cshtml";
+    ViewBag.smallTitle = "WiFi连接状态";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+
+}
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">运行模式:</label>
+            <label class="layui-form-label dcf-label2">AP</label>
+        </div>
+
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">SSID:</label>
+            <label class="layui-form-label dcf-label2">DSG-WiFi01</label>
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">密码:</label>
+            <label class="layui-form-label dcf-label2">12345678</label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th lay-data="{field:'index', width:100,type:'numbers'}">序号</th>
+                    <th lay-data="{field:'ip', width:150}">IP</th>
+                    <th lay-data="{field:'mark',width:200}">备注</th>
+                    <th lay-data="{field:'mac',width:150}">MAC</th>
+                    <th lay-data="{field:'isBindIP',width:150}">是否绑定地址</th>
+                    <th lay-data="{field:'opr',width:150}">操作</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@section script{
+
+}

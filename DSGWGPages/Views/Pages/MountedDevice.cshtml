@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayoutWithDiv.cshtml";
+    ViewBag.smallTiTle = "挂载设备";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+    <style>
+        .label-padding {
+            padding-left: 70px;
+        }
+
+        .dcf-label2 {
+            width: 200px;
+            text-align: left;
+        }
+
+        .dcf-form-input {
+            width: 300px;
+        }
+
+        .div-content {
+            width: 500px;
+        }
+
+        .btn-save {
+            float: right;
+        }
+
+        .select_type {
+            height: 35px;
+            width: 250px;
+            margin-top: 2px;
+            border-radius: 5px;
+            padding: 1px 5px;
+            border: 1px solid #E7E7E7;
+        }
+
+        .dcf-option {
+            padding: 2px 5px;
+            height: 45px;
+        }
+    </style>
+}
+
+<div class="layui-form div-content">
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">外网连接:</label>
+        <label class="layui-form-label dcf-label2">已连接</label>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">IP地址</label>
+            <label class="layui-form-label dcf-label2">14.158.69.135</label>
+        </div>
+        <!--<div class="layui-input-block dcf-input">
+            <input type="text" class="layui-input" />
+        </div>-->
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">LAN口1:</label>
+        <label class="layui-form-label dcf-label2">已连接</label>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">IP地址</label>
+            <label class="layui-form-label dcf-label2">192.168.1.1</label>
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">速率</label>
+            <label class="layui-form-label dcf-label2">100KB/S</label>
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">设备</label>
+            <!--<label class="layui-form-label dcf-label2">DSG-701频谱传感器</label>-->
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="wifiMode" class="input_type select_type" style="display: inline-block;">
+                    <option class="dcf-option" value="1" selected="selected">DSG-701频谱传感器</option>
+                    <!--<option value="2">中继模式</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">设备ID</label>
+            <input class="layui-input dcf-form-input" value="DSG-701" />
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">远程IP</label>
+            <input class="layui-input dcf-form-input" value="123.207.31.37" />
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">远程端口</label>
+            <input class="layui-input dcf-form-input" value="3389" />
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">设备协议</label>
+            <!--<input class="layui-input dcf-form-input" value="DSG_RX_V0.0.1 修改为select" />-->
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="wifiMode" class="input_type select_type" style="display: inline-block;">
+                    <option value="1" selected="selected">DSG_RX_V0.0.1</option>
+                    <!--<option value="2">中继模式</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item label-padding">
+            <label class="layui-form-label dcf-label">输出协议</label>
+            <!--<input class="layui-input dcf-form-input" value="DSG_NR_V0.0.1 修改为select" />-->
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="wifiMode" class="input_type select_type" style="display: inline-block;">
+                    <option value="1" selected="selected">DSG_NR_V0.0.1</option>
+                    <!--<option value="2">中继模式</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item label-padding">
+            <input class="layui-btn btn-save" type="button" name="" id="" value="保存" />
+        </div>
+    </div>
+
+</div>
+@section script{
+    }

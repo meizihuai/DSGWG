@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayoutWithDiv.cshtml";
+    ViewBag.smallTiTle = "系统工具";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+    <style>
+        .dcf-label2 {
+            width: 200px;
+            text-align: left;
+        }
+
+        .dcf-a {
+            padding: 9px 15px;
+            display: block;
+        }
+
+        .marginleft {
+            margin-left: 40px;
+        }
+    </style>
+}
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">系统时间</label>
+        <div class="layui-input-inline">
+            <span style="line-height:37px">@ViewBag.DateTime</span>
+        </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">系统版本</label>
+        <div class="layui-input-inline">
+            <label class="layui-form-label dcf-label2"><span>2.0.1</span> <span>无可用更新</span></label>
+        </div>
+        <div class="layui-input-inline">
+            <a id="update" class="dcf-a">升级</a>
+        </div>
+    </div>
+    <div class="layui-form-item -inline marginleft">
+        <button class="layui-btn" id="btn_reboot">重启系统</button>
+    </div>
+</div>
+@section script{
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#sysTime',
+                type: 'datetime'
+            });
+        });
+        function msgBox(str) {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    title: '提示',
+                    content: str
+                });
+            });
+        }
+        $("#btn_reboot").click(function () {
+            $.get("../api/values/reboot", "", function (data) {
+                msgBox(data.msg);
+            }, "json");
+        });
+    </script>
+}
+

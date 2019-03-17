@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayout.cshtml";
+
+}
+
+@section head{
+    @RenderSection("head", false)
+}
+
+<div class="layui-fluid layadmin-fluid">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@RenderSection("script", false)

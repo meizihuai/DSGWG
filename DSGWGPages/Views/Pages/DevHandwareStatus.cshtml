@@ -1,0 +1,112 @@
+﻿
+@section head{
+
+}
+
+<body class="layui-layout-body grayBg">
+    <div class="layui-card layui-card-header">
+        设备硬件状态
+    </div>
+    <div class="layui-fluid layadmin-fluid" id="div-status">
+        <div class="layui-row layui-col-space5">
+            <div class="layui-col-sm4 layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        网络切换
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="layuiadmin-card-list">{{net}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm4 layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        电源切换
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="layuiadmin-card-list">{{power}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm4 layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        经纬度
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="layuiadmin-card-list" style="font-size:20px">{{location}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm4 layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        电压
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="layuiadmin-card-list">{{voltage}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            onReady();
+        });
+        function onReady() {
+            var status = {
+                "refrushTime": "正在获取...",
+                "net": "正在获取...",
+                "power": "正在获取...",
+                "location": "正在获取...",
+                "voltage": "正在获取..."
+            }
+            var app = new Vue({
+                el: "#div-status",
+                data: status
+            });
+            startGetStatusLoop(status);
+        }
+        function startGetStatusLoop(status) {
+            getStatus(status);
+            var timer = setInterval(function () {
+                getStatus(status);
+            }, 5000);
+        }
+        function getStatus(status) {
+            $.get("../api/values/GetGateWayStatusInfo", "", function (data) {
+                if (data.result) {
+                    status.refrushTime = getCurrentDateTime();
+                    status.net = (data.data.net == "in" ? "内网" : "外网");
+                    status.power = (data.data.power == "on" ? "开启" : "关闭");
+                    status.location = data.data.lon + "," + data.data.lat;
+                    status.voltage = data.data.voltage + " V";
+                }
+            }, "json");
+        }
+    </script>
+    <script style="text/javaScript">
+        //在个位数的时间前加0
+        function formatZero(n) {
+            if (n >= 0 && n <= 9) {
+                return "0" + n;
+            } else {
+                return n;
+            }
+        }
+
+        //获取当前日期和时间
+        function getCurrentDateTime() {
+            var t = new Date();
+            var year = t.getFullYear();
+            var month = t.getMonth() + 1;
+            var day = t.getDate();
+            var hours = t.getHours();
+            var minutes = t.getMinutes();
+            var seconds = t.getSeconds();
+            return year + "-" + formatZero(month) + "-" + formatZero(day) + " " + formatZero(hours) + ":" + formatZero(minutes) + ":" + formatZero(seconds);
+        }
+    </script>
+</body>

@@ -1,0 +1,398 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SunLayout.cshtml";
+    ViewBag.smallTiTle = "参数设置";
+    ViewBag.haveAttentionSpan = true;
+    ViewBag.attentionContent = "本页面是设备程序参数设置页面，很多参数有重要意义，请谨慎调整";
+}
+@section head{
+    <style>
+        .attentionSpan {
+            color: red
+        }
+
+        .deleteA {
+            color: red;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .tableA {
+            color: blue;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .card-margin {
+            margin-top: 20px;
+        }
+    </style>
+}
+<div class="layui-fluid layadmin-fluid">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                系统参数调整
+                <div class="layui-btn-group" style="margin-left: 20px;">
+                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="btn_sysKeyAndValueAdd">
+                        <i class="layui-icon">&#xe654;</i>
+                    </button>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="btnRefrush_sysKeyAndValueAdd">
+                        <i class="layui-icon">&#xe669;</i>
+                    </button>
+                    <!-- <button class="layui-btn layui-btn-primary layui-btn-sm">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button> -->
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">参数名</th>
+                            <th style="width: 150px;">参数值</th>
+                            <th style="width: 150px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sysKeyAndValueTable">
+                        <tr v-cloak v-for="data in datalist">
+                            <td>
+                                <input type="text" class="layui-input" v-model="data.key" />
+                            </td>
+                            <td>
+                                <input type="text" class="layui-input" v-model="data.value" />
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="tableA" @@click="btnCommit(data)">提交</a>
+                                <a href="javascript:;" class="tableA" @@click="btnDefault(data)">默认</a>
+                                <a href="javascript:;" class="tableA" @@click="btnOld(data)">原值</a>
+                                <a href="javascript:;" class="deleteA" @@click="btnDelete(data)">删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-fluid layadmin-fluid card-margin">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                程序参数调整
+                <div class="layui-btn-group" style="margin-left: 20px;">
+                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="btn_programKeyAndValueAdd">
+                        <i class="layui-icon">&#xe654;</i>
+                    </button>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="btnRefrush_programKeyAndValueAdd">
+                        <i class="layui-icon">&#xe669;</i>
+                    </button>
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">ID</th>
+                            <th style="width: 100px;">参数名</th>
+                            <th style="width: 100px;">应用程序</th>
+                            <th style="width: 150px;">文件路径</th>
+                            <th style="width: 80px;">文件类型</th>
+                            <th style="width: 100px;">项目名</th>
+                            <th style="width: 150px;">参数Key</th>
+                            <th style="width: 150px;">参数Value</th>
+                            <th style="width: 100px;">备注</th>
+                            <th style="width: 150px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="programKeyAndValueTable">
+                        <tr v-cloak v-for="data in datalist">
+                            <td>
+                                {{data.id}}
+                            </td>
+                            <td>
+                                {{data.name}}
+                                <!-- <input type="text" class="layui-input" v-model="data.name" /> -->
+                            </td>
+                            <td>
+                                {{data.program}}
+                                <!-- <input type="text" class="layui-input" v-model="data.program" /> -->
+                            </td>
+                            <td>
+                                {{data.filePath}}
+                                <!-- <input type="text" class="layui-input" v-model="data.filePath" /> -->
+                            </td>
+                            <td>
+                                {{data.fileExten}}
+                                <!-- <input type="text" class="layui-input" v-model="data.fileExten" /> -->
+                            </td>
+                            <td>
+                                {{data.projectName}}
+                                <!-- <input type="text" class="layui-input" v-model="data.projectName" /> -->
+                            </td>
+                            <td>
+                                {{data.key}}
+                                <!-- <input type="text" class="layui-input" v-model="data.key" /> -->
+                            </td>
+                            <td>
+                                <input type="text" class="layui-input" v-model="data.value" />
+                            </td>
+                            <td>
+                                {{data.mark}}
+                                <!-- <input type="text" class="layui-input" v-model="data.mark" /> -->
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="tableA" @@click="btnCommit(data)">提交</a>
+                                <a href="javascript:;" class="tableA" @@click="btnDefault(data)">默认</a>
+                                <a href="javascript:;" class="tableA" @@click="btnOld(data)">原值</a>
+                                <a href="javascript:;" class="deleteA" @@click="btnDelete(data)">删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 这是系统参数调整区域 -->
+<script type="text/javascript">
+    function msgBox(str) {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: '提示',
+                content: str
+            });
+        });
+    }
+    $("#btn_sysKeyAndValueAdd").click(function () {
+        var itm = {
+            "key": "new_key_" + (app.datalist.length + 1),
+            "value": "value1",
+            "oldValue": "value1",
+            "defaultValue": "value1"
+        }
+        app.datalist.push(itm)
+    });
+    $("#btnRefrush_sysKeyAndValueAdd").click(function () {
+        refrshSys();
+        // location = location;
+
+    });
+    var app = new Vue({
+        el: "#sysKeyAndValueTable",
+        data: {
+            datalist: []
+        },
+        created() {
+            refrshSys();
+        },
+        methods: {
+            btnCommit: (data) => {
+                var key = data.key;
+                var value = data.value;
+                var d = {
+                    "key": key,
+                    "value": value
+                }
+                $.get("../api/values/SetKey", d, function (data) {
+                    if (data.result) {
+                        msgBox("提交成功!")
+                    } else {
+                        msgBox(data.msg + "<br>" + data.data);
+                    }
+                }, "json");
+            },
+            btnDefault: (data) => {
+                data.value = data.defaultValue;
+            },
+            btnOld: (data) => {
+                data.value = data.oldValue;
+            },
+            btnDelete: (data) => {
+                layui.use('layer', function () {
+                    layer.open({
+                        content: '请确认删除',
+                        btn: ['确认', '取消'],
+                        yes: function (index, layero) {
+                            var key = data.key;
+                            fetch("../api/values/DeleteKey?key=" + key)
+                                .then(response => response.json())
+                                .then(json => {
+                                    if (json.result) {
+                                        app.datalist.remove(data);
+                                        msgBox("删除成功!");
+                                    } else {
+                                        msgBox(json.msg);
+                                    }
+                                });
+                            layer.closeAll();
+                        },
+                        btn2: function (index, layero) {
+                            layer.closeAll();
+                        },
+                        cancel: function () {
+                            console.log("cancel");
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+    function refrshSys() {
+        layer.load(3, {
+            time: 10 * 1000
+        })
+        fetch("../api/values/GetConfigs")
+            .then(response => response.json())
+            .then(data => {
+                if (!data.result) {
+                    msgBox(data.msg);
+                }
+                var myDataList = new Array();
+                for (var i = 0; i < data.data.length; i++) {
+                    var itm = data.data[i];
+                    var key = itm.key;
+                    var value = itm.value;
+                    var type = itm.type;
+                    var defaultValue = itm.defaultValue;
+                    if (type == "string") {
+                        var myData = {
+                            "key": key,
+                            "value": value,
+                            "oldValue": value,
+                            "defaultValue": defaultValue
+                        }
+                        myDataList.push(myData);
+                    }
+                }
+                app.datalist = myDataList;
+            });
+        layer.closeAll();
+    }
+</script>
+<!-- 这是程序参数调整区域 -->
+<script type="text/javascript">
+    $("#btn_programKeyAndValueAdd").click(function () {
+        var itm = {
+            "name": "new_name_" + (app1.datalist.length + 1),
+            "program": "program1",
+            "filePath": "/usr/mzh/",
+            "fileExten": "ini",
+            "projectName": "projectName1",
+            "key": "key1",
+            "value": "value1",
+            "defaultValue": "defaultValue1",
+            "oldValue": "value1",
+            "mark": "mark1"
+        }
+        app1.datalist.push(itm)
+    });
+    $("#btnRefrush_programKeyAndValueAdd").click(function () {
+        refrshProgram();
+    });
+
+    function refrshProgram() {
+        layer.load(3, {
+            time: 10 * 1000
+        })
+        fetch("../api/values/GetProgramConfig")
+            .then(response => response.json())
+            .then(data => {
+                if (!data.result) {
+                    msgBox(data.msg);
+                } else {
+                    var list = data.data;
+                    for (var i = 0; i < list.length; i++) {
+                        list[i].oldValue = list[i].value;
+                    }
+                    app1.datalist = list;
+                }
+            });
+        layer.closeAll();
+    }
+    var app1 = new Vue({
+        el: "#programKeyAndValueTable",
+        data: {
+            datalist: []
+        },
+        created() {
+            refrshProgram();
+        },
+        methods: {
+            btnCommit: (data) => {
+                var str = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "../api/values/SetProgramConfig",
+                    data: str,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (json) {
+                        msgBox(json.msg);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
+            },
+            btnDefault: (data) => {
+                data.value = data.defaultValue;
+            },
+            btnOld: (data) => {
+                data.value = data.oldValue;
+            },
+            btnDelete: (data) => {
+                layui.use('layer', function () {
+                    layer.open({
+                        content: '请确认删除',
+                        btn: ['确认', '取消'],
+                        yes: function (index, layero) {
+                            var id = data.id;
+                            fetch("../api/values/DeleteProgramConfig?id=" + id)
+                                .then(response => response.json())
+                                .then(json => {
+                                    if (json.result) {
+                                        app.datalist.remove(data);
+                                        msgBox("删除成功!");
+                                    } else {
+                                        msgBox(json.msg);
+                                    }
+                                });
+                            layer.closeAll();
+                        },
+                        btn2: function (index, layero) {
+                            layer.closeAll();
+                        },
+                        cancel: function () {
+                            console.log("cancel");
+                        }
+                    });
+                });
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    Array.prototype.indexOf = function (val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == val) return i;
+        }
+        return -1;
+    };
+    Array.prototype.remove = function (val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+</script>

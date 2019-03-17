@@ -1,0 +1,143 @@
+﻿@{
+    Layout = "~/Views/Shared/_SunLayoutWithDiv.cshtml";
+    ViewBag.smallTiTle = "网络状态";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+    <style type="text/css">
+        .dcf-label {
+            width: 100px;
+        }
+
+        .dcf-input {
+            margin-left: 130px;
+        }
+
+        .dcf-img {
+            width: 40px;
+            display: block;
+            margin: 0 auto;
+            margin-top: 17px;
+            padding-top: 5px;
+        }
+
+        .dcf-USB {
+            width: 100px;
+            display: inline-block;
+            /*border: 1px solid black;*/
+            /*padding-top: ;*/
+        }
+
+        .dcf-span {
+            text-align: center;
+        }
+
+        .img-div {
+            width: 70px;
+            /*border: 1px solid black;*/
+            margin: 0 auto;
+            background: #E9E9E9;
+            height: 40px;
+        }
+
+        .span_txt {
+            line-height: 40px;
+        }
+
+        .select_type {
+            height: 35px;
+            width: 100px;
+            margin-top: 2px;
+            border-radius: 5px;
+            padding: 1px 5px;
+            border: 1px solid #E7E7E7;
+        }
+    </style>
+}
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">外网连接方式:</label>
+        <div class="layui-input-block dcf-input">
+            <span class="span_txt">4G路由器上网</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">IP地址:</label>
+        <div class="layui-input-block dcf-input">
+            <span class="span_txt">14.158.69.135</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">USB挂载设备:</label>
+        <div class="layui-input-block dcf-input">
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/usb.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">USB1</span>
+            </div>
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/usb.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">USB2</span>
+            </div>
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/usb-gray.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">USB3</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">WIFI:</label>
+        <div class="layui-input-block dcf-input">
+            <!--<input type="text" class="layui-input" />-->
+            <!--<label class="layui-form-label dcf-label">DSG_WiFi1</label>-->
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" value="DSG_WiFi1">
+            </div>
+            <!-- <label class="layui-form-label dcf-label">AP模式</label> -->
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="wifiMode" class="input_type select_type" style="display: inline-block;">
+                    <option value="1" selected="selected">AP模式</option>
+                    <option value="2">中继模式</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn">提交</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label dcf-label">LAN:</label>
+        <div class="layui-input-block dcf-input">
+            <!--<input type="text" class="layui-input" />-->
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/lan.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">LAN1</span>
+            </div>
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/lan.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">LAN2</span>
+            </div>
+            <div class="dcf-USB">
+                <div class="img-div">
+                    <img src="../img/lan-gray.png" class="dcf-img" />
+                </div>
+                <span class="layui-form-label dcf-span">LAN3</span>
+            </div>
+        </div>
+    </div>
+    <!--<span>外网连接方式:</span><label class="">4G路由器上网</label>-->
+</div>
+
+@section script{ 
+
+}
+
