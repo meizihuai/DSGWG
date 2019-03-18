@@ -15,9 +15,12 @@
 
     <div class="layui-card layui-card-header">
         @ViewBag.smallTitle
-        @if (ViewBag.haveAttentionSpan)
+        @if (ViewBag.haveAttentionSpan != null)
         {
-            <span class="attentionSpan">*@ViewBag.attentionContent*</span>
+            if (ViewBag.haveAttentionSpan)
+            {
+                <span class="attentionSpan">*@ViewBag.attentionContent*</span>
+            }
         }
     </div>
     @RenderBody()
