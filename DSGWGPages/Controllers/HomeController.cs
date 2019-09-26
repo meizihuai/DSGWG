@@ -26,11 +26,11 @@ namespace DSGWGPages.Controllers
             ViewBag.loginName = "null";
             if (name != null)
             {
-                string rootPath = _hostingEnvironment.WebRootPath;
-                //  string path = Path.Combine(rootPath, "1.txt");
-                string path = rootPath + "/1.txt";
-                System.IO.File.WriteAllText(path, name);
-                ViewBag.path = path;
+               // string rootPath = _hostingEnvironment.WebRootPath;
+               //   string path = Path.Combine(rootPath, "1.txt");
+               //// string path = rootPath + "/1.txt";
+               // System.IO.File.WriteAllText(path, name);
+                ViewBag.path = "";
                 if (name == "login")
                 {
 
@@ -64,10 +64,9 @@ namespace DSGWGPages.Controllers
            
             return View();
         }
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-         
-            HttpContext.Response.Cookies.Delete("token");          
+            HttpContext.Response.Cookies.Delete("token");
             return RedirectToAction("Login", "Home");
         }
 
